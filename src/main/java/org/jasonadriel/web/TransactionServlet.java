@@ -8,6 +8,7 @@ import org.jasonadriel.context.Application;
 import org.jasonadriel.model.Transaction;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
 
 public class TransactionServlet extends HttpServlet {
@@ -49,7 +50,7 @@ public class TransactionServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         if (req.getRequestURI().equalsIgnoreCase("/transactions")) {
             String reference = req.getParameter("reference");
-            Integer amount = Integer.valueOf(req.getParameter("amount"));
+            BigDecimal amount = BigDecimal.valueOf(Double.parseDouble(req.getParameter("amount")));
             Transaction transaction = Application.transactionService.create(reference, amount);
             String json = Application.objectMapper.writeValueAsString(transaction);
             resp.setContentType("application/json; charset=utf-8");

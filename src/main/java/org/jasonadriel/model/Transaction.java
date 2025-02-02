@@ -2,23 +2,24 @@ package org.jasonadriel.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.util.UUID;
 
 public class Transaction {
     private String id;
     private String reference;
-    private Integer amount;
+    private BigDecimal amount;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mmZ")
     private ZonedDateTime timestamp;
 
     public Transaction() {}
 
-    public Transaction(String reference, Integer amount) {
+    public Transaction(String reference, BigDecimal amount, ZonedDateTime timestamp) {
         this.id = UUID.randomUUID().toString();
         this.reference = reference;
         this.amount = amount;
-        this.timestamp = ZonedDateTime.now();
+        this.timestamp = timestamp;
     }
 
     public String getId() {
@@ -37,11 +38,11 @@ public class Transaction {
         this.reference = reference;
     }
 
-    public Integer getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(Integer amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 
